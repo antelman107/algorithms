@@ -18,7 +18,7 @@ jobs:
           #parent: dev
           # optional (defaults to neondb)
           #database: my-database
-          branch_name: preview/pr
+          branch_name: preview/pr-${{ github.event.number }}
           #username: db_user_for_url
           api_key: ${{ secrets.NEON_API_KEY }}
       - name: second
@@ -26,7 +26,7 @@ jobs:
         if: ${{ always() && github.event_name == 'pull_request' && github.event.action == 'closed'  }}
         with:
           project_id: rapid-haze-373089
-          branch: preview/pr
+          branch: preview/pr-${{ github.event.number }}
           # optional (defaults to your primary branch)
           #parent: dev
           # optional (defaults to neondb)
