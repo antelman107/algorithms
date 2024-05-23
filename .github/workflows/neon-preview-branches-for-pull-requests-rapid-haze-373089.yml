@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: first
         uses: neondatabase/create-branch-action@v5.0.0
-        if: ${{ github.event_name == 'pull_request' && (github.event.action == 'synchronize' || github.event.action == 'opened' || github.event.action == 'reopened')  }}
+        if: ${{ always() && github.event_name == 'pull_request' && (github.event.action == 'synchronize' || github.event.action == 'opened' || github.event.action == 'reopened')  }}
         with:
           project_id: proud-salad-35321605
           # optional (defaults to your primary branch)
@@ -23,7 +23,7 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
       - name: second
         uses: neondatabase/delete-branch-action@v3
-        if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed'  }}
+        if: ${{ always() && github.event_name == 'pull_request' && github.event.action == 'closed'  }}
         with:
           project_id: rapid-haze-373089
           branch: preview/pr
