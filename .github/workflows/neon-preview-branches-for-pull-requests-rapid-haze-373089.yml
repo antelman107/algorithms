@@ -23,7 +23,7 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
       - name: second
         uses: neondatabase/delete-branch-action@v3
-        if: ${{ github.event_name == 'pull_request' && (github.event.action == 'closed')  }}
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed'  }}
         with:
           project_id: rapid-haze-373089
           branch: preview/pr
