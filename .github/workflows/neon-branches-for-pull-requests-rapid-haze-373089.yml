@@ -28,7 +28,7 @@ jobs:
         uses: neondatabase/delete-branch-action@v3
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed'  }}
         with:
-          project_id: rapid-haze-373089
+          project_id: proud-salad-35321605
           branch: preview/pr-${{ github.event.number }}
           # optional (defaults to your primary branch)
           #parent: dev
