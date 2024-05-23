@@ -6,19 +6,32 @@ on:
     branches: [ "**" ]
 
 jobs:
-  create-neon-branch:  
+  branches:  
     runs-on: ubuntu-latest
     steps:
       - name: first
         uses: neondatabase/create-branch-action@v5.0.0
         if: ${{ github.event_name == 'pull_request' && (github.event.action == 'synchronize' || github.event.action == 'open')  }}
         with:
+          project_id: proud-salad-35321605
+          # optional (defaults to your primary branch)
+          #parent: dev
+          # optional (defaults to neondb)
+          #database: my-database
+          branch_name: preview/pr
+          #username: db_user_for_url
+          api_key: ${{ secrets.NEON_API_KEY }}
+      - name: second
+        uses: neondatabase/delete-branch-action@v3
+        if: ${{ github.event_name == 'pull_request' && (github.event.action == 'close')  }}
+        with:
           project_id: rapid-haze-373089
+          branch: preview/pr
           # optional (defaults to your primary branch)
           #parent: dev
           # optional (defaults to neondb)
           #database: my-database
           #branch_name: from_action_reusable
           #username: db_user_for_url
-          api_key: ${{ secrets.NEON_API_KEY }}
+          api_key: ${{ secrets.NEON_API_KEY }}     
   
