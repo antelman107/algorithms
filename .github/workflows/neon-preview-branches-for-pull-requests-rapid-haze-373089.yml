@@ -6,15 +6,18 @@ on:
     branches: [ "**" ]
 
 jobs:
-  Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v5.0.0
-    with:
-      project_id: rapid-haze-373089
-      # optional (defaults to your primary branch)
-      #parent: dev
-      # optional (defaults to neondb)
-      #database: my-database
-      #branch_name: from_action_reusable
-      #username: db_user_for_url
-      api_key: ${{ secrets.NEON_API_KEY }}
+  create-neon-branch:  
+    runs-on: ubuntu-latest
+    steps:
+      - name: first
+        uses: neondatabase/create-branch-action@v5.0.0
+        with:
+          project_id: rapid-haze-373089
+          # optional (defaults to your primary branch)
+          #parent: dev
+          # optional (defaults to neondb)
+          #database: my-database
+          #branch_name: from_action_reusable
+          #username: db_user_for_url
+          api_key: ${{ secrets.NEON_API_KEY }}
   
