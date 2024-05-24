@@ -16,11 +16,7 @@ jobs:
     steps:
       - name: Create Neon Branch for Open Pull Request Step
         uses: neondatabase/create-branch-action@v5.0.0
-        if: |
-          ${{ github.event_name == 'pull_request' && (
-          github.event.action == 'synchronize'
-          || github.event.action == 'opened'
-          || github.event.action == 'reopened')  }}
+        if: ${{ github.event_name == 'pull_request' && (github.event.action == 'synchronize' || github.event.action == 'opened' || github.event.action == 'reopened')  }}
         with:
           project_id: "proud-salad-35321605"
           branch_name: preview/pr-${{ github.event.number }}
