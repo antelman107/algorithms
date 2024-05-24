@@ -5,6 +5,7 @@ run-name: Create/Delete Branch for Pull Request Workflow
 on:
   pull_request:
     types:
+      - reopened
       - opened
       - synchronize
       - closed
