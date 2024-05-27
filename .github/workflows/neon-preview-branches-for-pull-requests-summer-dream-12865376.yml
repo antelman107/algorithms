@@ -9,6 +9,7 @@ on:
       - reopened
       - synchronize
       - closed
+      - labeled
 
 jobs:
   neon_branch_management:
@@ -23,7 +24,7 @@ jobs:
           || github.event.action == 'opened'
           || github.event.action == 'reopened')  }}
         with:
-          project_id: "summer-dream-12865376"
+          project_id: "proud-salad-35321605"
           branch_name: preview/pr-${{ github.event.number }}
           parent: ""
           database: "neondb"
@@ -37,9 +38,10 @@ jobs:
           github.event_name == 'pull_request' &&
           (github.event.action == 'synchronize' ||
            github.event.action == 'opened' ||
-           github.event.action == 'reopened')  }}
+           github.event.action == 'reopened' ||
+           github.event.action == 'labeled')  }}
         with:
-          project_id: "summer-dream-12865376"
+          project_id: "proud-salad-35321605"
           branch: preview/pr-${{ github.event.number }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
@@ -47,6 +49,6 @@ jobs:
         uses: neondatabase/delete-branch-action@v3
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
         with:
-          project_id: "summer-dream-12865376"
+          project_id: "proud-salad-35321605"
           branch: preview/pr-${{ github.event.number }}
           api_key: ${{ secrets.NEON_API_KEY }}
