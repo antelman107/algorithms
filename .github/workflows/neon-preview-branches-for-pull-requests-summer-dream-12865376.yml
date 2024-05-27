@@ -42,6 +42,7 @@ jobs:
            github.event.action == 'labeled')  }}
         with:
           project_id: "proud-salad-35321605"
+          parent: true
           branch: preview/pr-${{ github.event.number }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
