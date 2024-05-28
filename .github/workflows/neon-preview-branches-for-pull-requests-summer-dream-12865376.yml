@@ -20,5 +20,7 @@ jobs:
       parent_branch: main
       db: neondb
       role: neondb_owner
+    secrets:
+      inherit
       
     
