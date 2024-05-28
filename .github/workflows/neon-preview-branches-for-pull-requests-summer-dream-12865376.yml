@@ -14,42 +14,11 @@ on:
 jobs:
   neon_branch_management:
     name: Create/Delete Branch for Pull Request Job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create Neon Branch for Open Pull Request Step
-        uses: neondatabase/create-branch-action@v5.0.0
-        if: |
-          ${{ github.event_name == 'pull_request' && (
-          github.event.action == 'synchronize'
-          || github.event.action == 'opened'
-          || github.event.action == 'reopened')  }}
-        with:
-          project_id: "proud-salad-35321605"
-          branch_name: preview/pr-${{ github.event.number }}
-          parent: ""
-          database: "neondb"
-          username: "neondb_owner"
-          api_key: ${{ secrets.NEON_API_KEY }}
-
-      - name: Reset Neon Branch
-        uses: neondatabase/reset-branch-action@v1
-        if: |
-          ${{ contains(github.event.pull_request.labels.*.name, 'Reset Neon Branch') &&
-          github.event_name == 'pull_request' &&
-          (github.event.action == 'synchronize' ||
-           github.event.action == 'opened' ||
-           github.event.action == 'reopened' ||
-           github.event.action == 'labeled')  }}
-        with:
-          project_id: "proud-salad-35321605"
-          parent: true
-          branch: preview/pr-${{ github.event.number }}
-          api_key: ${{ secrets.NEON_API_KEY }}
-
-      - name: Delete Neon Branch for Closed/Merge Pull Request Step
-        uses: neondatabase/delete-branch-action@v3
-        if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
-        with:
-          project_id: "proud-salad-35321605"
-          branch: preview/pr-${{ github.event.number }}
-          api_key: ${{ secrets.NEON_API_KEY }}
+    uses: antelman107/reusable_workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@main
+    with:
+      project_id: proud-salad-35321605
+      parent_branch: main
+      db: neondb
+      role: neondb_owner
+      
+    
