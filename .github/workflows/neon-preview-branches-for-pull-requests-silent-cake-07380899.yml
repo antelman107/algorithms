@@ -15,5 +15,8 @@ jobs:
     name: Create/Delete/Reset Branch for Pull Request Job
     uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@feat/13899/fetch
     with:
-      project_id: "proud-salad-35321605"
-    secrets: inherit
+      project_id: "silent-cake-07380899"
+      api_url: "https://f16e-88-232-174-184.ngrok-free.app/api/v2"
+    secrets: 
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+
