@@ -13,7 +13,7 @@ on:
 jobs:
   neon_branch_management:
     name: Create/Delete/Reset Branch for Pull Request Job
-    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@"feat/13899/fetch"
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@97cc28a785ecd106a7b0eb0a14d42119e5cc10b8
     with:
       project_id: "proud-salad-35321605"
     secrets: inherit
