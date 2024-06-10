@@ -13,10 +13,7 @@ on:
 jobs:
   neon_branch_management:
     name: Create/Delete/Reset Branch for Pull Request Job
-    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@main
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@feat/13899/fetch
     with:
-      project_id: "silent-cake-07380899"
-      parent_branch: "br-damp-butterfly-42334162"
-      db: "neondb"
-      role: "neondb_owner"
+      project_id: "proud-salad-35321605"
     secrets: inherit
