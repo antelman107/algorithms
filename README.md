@@ -1,4 +1,3 @@
-
 ### Solving algorithm tasks on GO
 
 
