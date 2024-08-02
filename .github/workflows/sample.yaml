@@ -38,7 +38,6 @@ jobs:
       - name: Calculate Branch Annotation
         id: annotation
         run: |
-          echo '${{ toJSON(github) }}'
           echo "annotation_json=$(jq -n '$ARGS.named' \
             --arg github-commit-repo '${{ github.repository }}' \
             --arg github-commit-author-login '${{ github.event.pull_request.user.login }}' \
