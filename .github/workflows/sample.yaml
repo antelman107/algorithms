@@ -41,7 +41,12 @@ jobs:
           echo "annotation_json='$(jq -cn '$ARGS.named' \
             --arg github-commit-repo '${{ github.repository }}' \
             --arg github-commit-author-login '${{ github.event.pull_request.user.login }}' \
-            --arg github-commit-ref '${{ needs.setup.outputs.branch }}')'" >> "$GITHUB_OUTPUT"
+            --arg github-commit-ref '${{ needs.setup.outputs.branch }}')'"
+          
+          echo "annotation_json='$(jq -cn '$ARGS.named' \
+                      --arg github-commit-repo '${{ github.repository }}' \
+                      --arg github-commit-author-login '${{ github.event.pull_request.user.login }}' \
+                      --arg github-commit-ref '${{ needs.setup.outputs.branch }}')'" >> "$GITHUB_OUTPUT"
       - name: Create Neon Branch
         id: create_neon_branch
         uses: neondatabase/create-branch-action@fcfade2eadcc79900f361f7a9fe61b99448d5355
