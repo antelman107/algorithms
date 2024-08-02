@@ -42,6 +42,7 @@ jobs:
             --arg commit-repo '${{ github.repository }}' \
             --arg commit-author-login '${{ github.event.pull_request.user.login }}' \
             --arg commit-ref '${{ needs.setup.outputs.branch }}' \
+            --arg commit-sha '${{ github.event.pull_request.head.sha }}' \
             --arg pr-number '${{ github.event.pull_request.number }}' \
             --arg pr-title '${{ github.event.pull_request.title }}' \
           )" >> "$GITHUB_OUTPUT"
