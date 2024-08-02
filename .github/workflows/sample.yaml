@@ -39,8 +39,8 @@ jobs:
         id: annotation
         run:
           echo '${{ toJSON(github) }}'
-          echo "annotation_json=$(jq -n '{$ARGS.named}' \
-            --arg github-commit-repo '${{ github.repository}}' \
+          echo "annotation_json=$(jq -n '$ARGS.named' \
+            --arg github-commit-repo '${{ github.repository }}' \
             --arg github-commit-author-login '${{ github.event.pull_request.user.login }}' \
             --arg github-commit-ref '${{ needs.setup.outputs.branch }}')" >> "$GITHUB_OUTPUT"
       - name: Create Neon Branch
