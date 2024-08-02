@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Compile Branch Annotation
         run:
-          echo '${{ toJSON(github.event) }}'
+          echo '${{ toJSON(github) }}'
 #          echo "$(jq -n '{$ARGS.named}' \
 #            --arg github-commit-repo '${{ github.event.repository.owner }}/${{ github.event.repository.name }}' \
 #            --arg github-commit-author-login '${{ github.event.repository.owner }}/${{ github.event.repository.name }}' \
