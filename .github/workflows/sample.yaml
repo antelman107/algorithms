@@ -35,17 +35,6 @@ jobs:
       || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
-      - name: Calculate Branch Annotation
-        id: annotation
-        run: |
-          echo "annotation_json=$(jq -cn '$ARGS.named' \
-            --arg github-commit-repo '${{ github.repository }}' \
-            --arg github-commit-author-login '${{ github.event.pull_request.user.login }}' \
-            --arg github-commit-ref '${{ needs.setup.outputs.branch }}' \
-            --arg github-commit-sha '${{ github.event.pull_request.head.sha }}' \
-            --arg github-pr-number '${{ github.event.pull_request.number }}' \
-            --arg github-pr-title '${{ github.event.pull_request.title }}' \
-          )" >> "$GITHUB_OUTPUT"
       - name: Create Neon Branch
         id: create_neon_branch
         uses: neondatabase/create-branch-action@feat/annotation
@@ -53,7 +42,6 @@ jobs:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
-          annotation: ${{ steps.annotation.outputs.annotation_json }}
 
   # The step above creates a new Neon branch.
   # You may want to do something with the new branch, such as run migrations, run tests
