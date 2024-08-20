@@ -8,7 +8,8 @@ on:
       - reopened
       - synchronize
       - closed
-  push:     
+  push:
+  label:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -62,6 +63,25 @@ jobs:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}        
+  create_neon_branch_label:
+    name: Create Neon Branch label
+    outputs:
+      db_url: ${{ steps.create_neon_branch_encode.outputs.db_url }}
+      db_url_with_pooler: ${{ steps.create_neon_branch_encode.outputs.db_url_with_pooler }}
+    needs: setup
+    if: |
+      github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: echo '${{ toJSON(github) }}'
+      - name: Create Neon Branch Push
+        id: create_neon_branch_push
+        uses: neondatabase/create-branch-action@feat/annotation
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          api_key: ${{ secrets.NEON_API_KEY }}               
 
   # The step above creates a new Neon branch.
   # You may want to do something with the new branch, such as run migrations, run tests
