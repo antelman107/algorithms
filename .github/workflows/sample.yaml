@@ -41,7 +41,7 @@ jobs:
         uses: neondatabase/create-branch-action@fix_parent_parameter_ifs
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
-          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          branch_name: prefix preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }} suffix
           parent: br-cool-thunder-a5m47d12
           api_key: ${{ secrets.NEON_API_KEY }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: neondatabase/create-branch-action@fix_parent_parameter_ifs
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
-          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          branch_name: prefix preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }} suffix
           parent: br-cool-thunder-a5m47d12
           api_key: ${{ secrets.NEON_API_KEY }}        
 
