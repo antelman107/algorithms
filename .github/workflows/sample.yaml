@@ -38,10 +38,11 @@ jobs:
     steps:
       - name: Create Neon Branch
         id: create_neon_branch
-        uses: neondatabase/create-branch-action@v5
+        uses: neondatabase/create-branch-action@fix_parent_parameter_ifs
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          parent: br-cool-thunder-a5m47d12
           api_key: ${{ secrets.NEON_API_KEY }}
 
   create_neon_branch_push:
@@ -56,10 +57,11 @@ jobs:
     steps:
       - name: Create Neon Branch Push
         id: create_neon_branch_push
-        uses: neondatabase/create-branch-action@v5
+        uses: neondatabase/create-branch-action@fix_parent_parameter_ifs
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          parent: br-cool-thunder-a5m47d12
           api_key: ${{ secrets.NEON_API_KEY }}        
 
   # The step above creates a new Neon branch.
