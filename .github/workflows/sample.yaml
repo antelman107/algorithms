@@ -62,11 +62,15 @@ jobs:
           branch_name: preview/branch-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}        
       - uses: neondatabase/reset-branch-action@feat/output_connection_string
+        id: reset_branch
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           parent: true
           branch: preview/branch-${{ needs.setup.outputs.branch }}
-          api_key: ${{ secrets.NEON_API_KEY }}    
+          api_key: ${{ secrets.NEON_API_KEY }}
+      - run: 
+          echo '${{ steps.reset_branch.outputs.db_url }}'    
+          echo '${{ steps.reset_branch.outputs.db_url_with_pooler }}'    
 
   # The step above creates a new Neon branch.
   # You may want to do something with the new branch, such as run migrations, run tests
