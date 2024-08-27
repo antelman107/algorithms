@@ -71,6 +71,9 @@ jobs:
       - run: 
           echo '${{ steps.reset_branch.outputs.db_url }}'    
           echo '${{ steps.reset_branch.outputs.db_url_with_pooler }}'    
+          echo '${{ steps.reset_branch.outputs.host }}'
+          echo '${{ steps.reset_branch.outputs.host_with_pooler }}'
+          echo '${{ steps.reset_branch.outputs.password }}'
 
   # The step above creates a new Neon branch.
   # You may want to do something with the new branch, such as run migrations, run tests
