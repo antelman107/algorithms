@@ -67,6 +67,10 @@ jobs:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           parent: true
           branch: preview/branch-${{ needs.setup.outputs.branch }}
+          cs_role_name: test1
+          cs_database: test2
+          cs_prisma: true
+          cs_ssl: omit
           api_key: ${{ secrets.NEON_API_KEY }}
       - run: 
           echo '${{ steps.reset_branch.outputs.db_url }}'    
