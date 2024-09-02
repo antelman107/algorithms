@@ -36,6 +36,7 @@ jobs:
       || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
+      - run: echo '${{ toJSON(github) }}'
       - name: Create Neon Branch PR
         id: create_neon_branch
         uses: neondatabase/create-branch-action@v5
@@ -54,13 +55,32 @@ jobs:
       github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - name: Create Neon Branch Push
-        id: create_neon_branch_push
-        uses: neondatabase/create-branch-action@v5
+      - run: echo '${{ toJSON(github) }}'
+      
+      #- name: Create Neon Branch Push
+      #  id: create_neon_branch_push
+      #  uses: neondatabase/create-branch-action@v5
+      #  with:
+      #    project_id: ${{ vars.NEON_PROJECT_ID }}
+      #    branch_name: preview/branch-${{ needs.setup.outputs.branch }}
+      #    api_key: ${{ secrets.NEON_API_KEY }}        
+      - uses: neondatabase/reset-branch-action@feat/output_connection_string
+        id: reset_branch
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
-          branch_name: preview/branch-${{ needs.setup.outputs.branch }}
-          api_key: ${{ secrets.NEON_API_KEY }}        
+          parent: true
+          branch: preview/branch-${{ needs.setup.outputs.branch }}
+          cs_role_name: test1
+          cs_database: test2
+          cs_prisma: true
+          cs_ssl: omit
+          api_key: ${{ secrets.NEON_API_KEY }}
+      - run: 
+          echo '${{ steps.reset_branch.outputs.db_url }}'    
+          echo '${{ steps.reset_branch.outputs.db_url_with_pooler }}'    
+          echo '${{ steps.reset_branch.outputs.host }}'
+          echo '${{ steps.reset_branch.outputs.host_with_pooler }}'
+          echo '${{ steps.reset_branch.outputs.password }}'
 
   # The step above creates a new Neon branch.
   # You may want to do something with the new branch, such as run migrations, run tests
