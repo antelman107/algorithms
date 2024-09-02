@@ -36,7 +36,7 @@ jobs:
       || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJSON(github) }}
+      - run: echo '${{ toJSON(github) }}'
       - name: Create Neon Branch PR
         id: create_neon_branch
         uses: neondatabase/create-branch-action@v5
@@ -55,7 +55,7 @@ jobs:
       github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJSON(github) }}
+      - run: echo '${{ toJSON(github) }}'
       
       #- name: Create Neon Branch Push
       #  id: create_neon_branch_push
