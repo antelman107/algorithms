@@ -1,0 +1,26 @@
+
+name: Create/Delete Branch for Pull Request Workflow
+run-name: Create/Delete Branch for Pull Request Workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+      - labeled
+
+jobs:
+  neon_branch_management:
+    name: Create/Delete Branch for Pull Request Job
+    uses: antelman107/reusable_workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@main
+    with:
+      project_id: proud-salad-35321605
+      parent_branch: main
+      db: neondb
+      role: neondb_owner
+    secrets:
+      inherit
+      
+    
