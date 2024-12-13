@@ -1,0 +1,21 @@
+name: Create/Delete/Reset Branch for Pull Request Workflow
+run-name: Create/Delete/Reset Branch for Pull Request Workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+      - labeled
+
+jobs:
+  neon_branch_management:
+    name: Create/Delete/Reset Branch for Pull Request Job
+    uses: neondatabase/reusable-workflows/.github/workflows/neon-preview-branches-for-pull-requests.yml@feat/13899/fetch
+    with:
+      project_id: "red-frog-47966253"
+      
+    secrets:
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
